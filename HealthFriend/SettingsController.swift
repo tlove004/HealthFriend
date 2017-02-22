@@ -79,6 +79,7 @@ class SettingsController : ViewController, CLLocationManagerDelegate {
             
             self.present(alert, animated: true, completion: nil)
         }
+        locationManager.requestAlwaysAuthorization()
         
         if termsAccepted && CLLocationManager.authorizationStatus() != .authorizedAlways {            let alert = UIAlertController(title: "Turn on Location Services", message: "This app is useless without location services enabled.  Please go to settings and enable location services (allow in background) for this application.", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "No thanks", style: UIAlertActionStyle.cancel, handler: nil))
