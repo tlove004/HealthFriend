@@ -20,12 +20,32 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Big brother wants to watch you..</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>ArimaMadurai-Black.tff</string>
+		<string>ArimaMadurai-Bold.tff</string>
+		<string>ArimaMadurai-Extrabold.tff</string>
+		<string>ArimaMadurai-ExtraLight.tff</string>
+		<string>ArimaMadurai-Light.tff</string>
+		<string>ArimaMadurai-Medium.tff</string>
+		<string>ArimaMadurai-Regular.tff</string>
+		<string>ArimaMadurai-Thin.tff</string>
+		<string>Item-Regular.tff</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>location</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
+		<string>gps</string>
 		<string>armv7</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>

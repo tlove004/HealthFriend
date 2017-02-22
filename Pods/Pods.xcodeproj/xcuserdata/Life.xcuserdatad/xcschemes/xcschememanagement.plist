@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Pods-HealthFriend.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-HealthFriendTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-HealthFriendUITests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>YelpAPI.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>22B0A529FDFA13B7BEF748C31A72CE9C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9EFA52EE64D7A128DE22E5AEA0A8B5E7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A776F4775EBE04F0EF1482B5D5F738CC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F4747B3B2E48096253461BA4F38F61FE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
