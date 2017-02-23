@@ -10,10 +10,7 @@ import UIKit
 import CoreLocation
 
 class SettingsController : ViewController, CLLocationManagerDelegate {
-    
-    private var cats = ""
-    private var prox = ""
-    private var mode = ""
+
     private var suggestions: Bool = false
     
     @IBOutlet var SelectedCats: UIButton!
@@ -22,9 +19,9 @@ class SettingsController : ViewController, CLLocationManagerDelegate {
     @IBOutlet var AlternativeSuggestionsOption: UIButton!
     
     @IBOutlet var SaveButton: UIButton!
-    
-    let termsAccepted = UserDefaults.standard.bool(forKey: "termsAccepted")
-    let hasSetup = UserDefaults.standard.bool(forKey: "hasSetup")
+//
+//    var termsAccepted = UserDefaults.standard.bool(forKey: "termsAccepted")
+//    var hasSetup = UserDefaults.standard.bool(forKey: "hasSetup")
     var locationManager: CLLocationManager!
     
     override func viewDidLoad() {
@@ -35,23 +32,19 @@ class SettingsController : ViewController, CLLocationManagerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        SelectedCats.contentHorizontalAlignment = .center
-        SelectedCats.titleLabel?.textAlignment = .center
-        NotificationMode.contentHorizontalAlignment = .center
-        NotificationMode.titleLabel?.textAlignment = .center
-        MYProximity.contentHorizontalAlignment = .center
-        MYProximity.titleLabel?.textAlignment = .center
+//        SelectedCats.contentHorizontalAlignment = .center
+//        NotificationMode.contentHorizontalAlignment = .center
+//        MYProximity.contentHorizontalAlignment = .center
         locationManager.allowsBackgroundLocationUpdates = true
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        SelectedCats.titleLabel?.adjustsFontSizeToFitWidth = true
-        MYProximity.titleLabel?.adjustsFontSizeToFitWidth = true
     }
     
 
     @IBAction func SaveSettings() {
         //TODO: check if everything has been setup
         
-        if !termsAccepted {
+        print("terms accepted: ", UserDefaults.standard.bool(forKey: "termsAccepted"))
+        if !(UserDefaults.standard.bool(forKey: "termsAccepted")) {
             let alert = UIAlertController(title: "Accept Terms", message: "Click 'Accept' to agree to our Terms of Use", preferredStyle: UIAlertControllerStyle.alert)
             
             alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: { action in
@@ -79,11 +72,16 @@ class SettingsController : ViewController, CLLocationManagerDelegate {
             
             self.present(alert, animated: true, completion: nil)
         }
-        locationManager.requestAlwaysAuthorization()
         
-        if termsAccepted && CLLocationManager.authorizationStatus() != .authorizedAlways {            let alert = UIAlertController(title: "Turn on Location Services", message: "This app is useless without location services enabled.  Please go to settings and enable location services (allow in background) for this application.", preferredStyle: UIAlertControllerStyle.alert)
+        if CLLocationManager.authorizationStatus() != .authorizedAlways {
+            locationManager.requestAlwaysAuthorization()
+        }
+        
+        if UserDefaults.standard.bool(forKey: "termsAccepted") && CLLocationManager.authorizationStatus() != .authorizedAlways {
+            locationManager.requestAlwaysAuthorization()
+            let alert = UIAlertController(title: "Turn on Location Services", message: "This app is useless without location services enabled.  Please go to settings and enable location services (allow in background) for this application.", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "No thanks", style: UIAlertActionStyle.cancel, handler: nil))
-            alert.addAction(UIAlertAction(title: "Accept", style: UIAlertActionStyle.destructive, handler: { action in
+            alert.addAction(UIAlertAction(title: "Settings", style: UIAlertActionStyle.destructive, handler: { action in
                 if let appSettings = NSURL(string: UIApplicationOpenSettingsURLString) {
                     UIApplication.shared.open(appSettings as URL)
                 }
@@ -94,13 +92,19 @@ class SettingsController : ViewController, CLLocationManagerDelegate {
             if CLLocationManager.authorizationStatus() != .authorizedAlways {
                 UserDefaults.standard.set(false, forKey: "hasSetup")
                 UserDefaults.standard.synchronize()
-                print(hasSetup)
-                print("here")
+                print(UserDefaults.standard.bool(forKey: "hasSetup"))
+                print("123")
             }
             else {
-                print(hasSetup)
+                UserDefaults.standard.set(true, forKey: "hasSetup")
+                print(UserDefaults.standard.bool(forKey: "hasSetup"))
+                print("456")
+                print(UserDefaults.standard.bool(forKey: "termsAccepted"))
             }
         }
+        print("hasSetup: ", UserDefaults.standard.bool(forKey: "hasSetup"))
+        print("789")
+        print("termsAccepted: ", UserDefaults.standard.bool(forKey: "termsAccepted"))
     }
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -123,18 +127,19 @@ class SettingsController : ViewController, CLLocationManagerDelegate {
     }
     
     func updateNotificationsMode(action: UIAlertAction) {
-        NotificationMode.titleLabel?.text = action.title
+        NotificationMode.setTitle(action.title, for: .normal)
     }
 
     @IBAction func proxButtonPressed() {
         let alert = UIAlertController(title: "Proximity", message: "Enter how close to an establishment you want to be before being notified:", preferredStyle: UIAlertControllerStyle.alert)
         alert.addTextField { (textField) in
             textField.keyboardType = .numberPad
-            textField.text = self.MYProximity.titleLabel!.text
+            textField.text = self.MYProximity.currentTitle
+            textField.selectAll(Any?.self)
         }
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { [weak alert] (_) in
             let textField = alert!.textFields![0] as UITextField
-            self.MYProximity.titleLabel?.text = textField.text!
+            self.MYProximity.setTitle(textField.text, for: .normal)
         }))
         self.present(alert, animated: true, completion: nil)
     }

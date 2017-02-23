@@ -36,7 +36,6 @@ class TableViewController: UITableViewController {
     
 
     @IBAction func SaveButtonTapped(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: true, completion: nil)
         numSelected = 0
         selectedCats = ""
         if (categories.indexPathsForSelectedRows == nil) {
@@ -59,10 +58,10 @@ class TableViewController: UITableViewController {
                 }
             }
         }
-        print(numSelected)
+        //print(numSelected)
         let prev = presentingViewController as! SettingsController
-        prev.SelectedCats.titleLabel?.text = selectedCats
-        
+        prev.SelectedCats.setTitle(selectedCats, for: .normal)
+        self.dismiss(animated: true, completion: nil)
     }
 
 }

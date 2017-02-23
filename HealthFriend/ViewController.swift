@@ -17,11 +17,16 @@ let coords = YLPCoordinate(latitude: 123, longitude: 123)
 
 class ViewController: UIViewController {
 
-    @IBOutlet var getStartedBtn: UIButton!
+   // @IBOutlet var getStartedBtn: UIButton!
+   // @IBOutlet weak var welcomeLabel: UILabel!
+    
+   
+    
+   // var pageIndex:Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getStartedBtn?.contentEdgeInsets = UIEdgeInsetsMake(20, 45, 30, 45)
+     //   getStartedBtn?.contentEdgeInsets = UIEdgeInsetsMake(20, 45, 30, 45)
         YLPClient.authorize(withAppId: myID, secret: mySecret, completionHandler: { (client, error) -> Void in
             //print(client!)
             
@@ -43,8 +48,6 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        createGradientLayer()
-        getStartedBtn?.isHidden = false
     }
 
     @IBOutlet weak var myproximity: UITextField!
@@ -63,19 +66,6 @@ class ViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
         let prev = presentingViewController as! SettingsController
         prev.NotificationMode.titleLabel?.text = notifications.titleForSegment(at: notifications.selectedSegmentIndex)
-    }
-    
-    var bottom: UIColor = UIColor.init(red: 36/255.0, green: 149/255.0, blue: 242/255.0, alpha: 1.0)
-    var top: UIColor = UIColor.init(red: 135/255.0, green: 198/255.0, blue: 249/255.0, alpha: 1.0)
-    var gradientLayer: CAGradientLayer = CAGradientLayer()
-    
-    func createGradientLayer() {
-        
-        gradientLayer.frame = self.view.bounds
-        
-        gradientLayer.colors = [top.cgColor, bottom.cgColor]
-        
-        self.view.layer.insertSublayer(gradientLayer, at: 0)
     }
     
 }
