@@ -1,12 +1,17 @@
 PODS:
+  - Charts (3.0.1):
+    - Charts/Core (= 3.0.1)
+  - Charts/Core (3.0.1)
   - YelpAPI (2.0.0)
 
 DEPENDENCIES:
+  - Charts
   - YelpAPI
 
 SPEC CHECKSUMS:
+  Charts: 0e84f4418e87dad6a9edde221fba37ebb51d3ba7
   YelpAPI: a0475cf4a7b6f9fe81f1bb7b8a8492770f21e3c7
 
-PODFILE CHECKSUM: db0a6656f8658c23e51656edf8024b82f59b9613
+PODFILE CHECKSUM: a3fe9c6e37945db47a6f495945b2b2ee548ecf8c
 
 COCOAPODS: 1.2.0

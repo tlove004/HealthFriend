@@ -8,6 +8,7 @@ target 'HealthFriend' do
   # Pods for HealthFriend
 
   pod 'YelpAPI'
+  pod 'Charts'
 
   target 'HealthFriendTests' do
     inherit! :search_paths

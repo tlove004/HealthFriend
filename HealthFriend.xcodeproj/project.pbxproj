@@ -26,9 +26,9 @@
 		1C4300061E5CD0B200FE6BFE /* ic_settings_3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C4300051E5CD0B200FE6BFE /* ic_settings_3x.png */; };
 		1C4300081E5CD10A00FE6BFE /* ic_settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C4300071E5CD10A00FE6BFE /* ic_settings.png */; };
 		1C43000A1E5CDCA200FE6BFE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C4300091E5CDCA200FE6BFE /* MapKit.framework */; };
+		1C46A9101E5F7A30003BBDD2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C46A90F1E5F7A30003BBDD2 /* HomeViewController.swift */; };
 		1C6D69641E5D072B001AF16E /* WelcomePagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6D69631E5D072B001AF16E /* WelcomePagesController.swift */; };
 		1C6D696C1E5E08C1001AF16E /* PageContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6D696B1E5E08C1001AF16E /* PageContentController.swift */; };
-		1C9D311C1E5E5DD800621B64 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9D311B1E5E5DD800621B64 /* LaunchViewController.swift */; };
 		1CDE04821E5E3E970041275C /* HealthFriend.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CDE04811E5E3E970041275C /* HealthFriend.png */; };
 		1CDE04841E5E478D0041275C /* UIFontSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CDE04831E5E478D0041275C /* UIFontSettings.swift */; };
 		2CAD4CB4F0732DBCD6FDE2A3 /* Pods_HealthFriendUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15AB3B9F139E35A6B024E195 /* Pods_HealthFriendUITests.framework */; };
@@ -76,13 +76,13 @@
 		1C0BE3F31E5957C800B862D2 /* UIButtonBorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonBorder.swift; sourceTree = "<group>"; };
 		1C0BE3F51E59607400B862D2 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		1C2B01541E5E63C40031EA69 /* welcome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome.png; sourceTree = "<group>"; };
-		1C3393F31E5A259D003E4A75 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = "<group>"; };
+		1C3393F31E5A259D003E4A75 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		1C4300051E5CD0B200FE6BFE /* ic_settings_3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_settings_3x.png; sourceTree = "<group>"; };
 		1C4300071E5CD10A00FE6BFE /* ic_settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_settings.png; sourceTree = "<group>"; };
 		1C4300091E5CDCA200FE6BFE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		1C46A90F1E5F7A30003BBDD2 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1C6D69631E5D072B001AF16E /* WelcomePagesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomePagesController.swift; sourceTree = "<group>"; };
 		1C6D696B1E5E08C1001AF16E /* PageContentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageContentController.swift; sourceTree = "<group>"; };
-		1C9D311B1E5E5DD800621B64 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		1CDE04811E5E3E970041275C /* HealthFriend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HealthFriend.png; sourceTree = "<group>"; };
 		1CDE04831E5E478D0041275C /* UIFontSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFontSettings.swift; sourceTree = "<group>"; };
 		2052C99FB0D9F8C28D80336B /* Pods-HealthFriend.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HealthFriend.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HealthFriend/Pods-HealthFriend.debug.xcconfig"; sourceTree = "<group>"; };
@@ -156,12 +156,12 @@
 				1C0BE3F51E59607400B862D2 /* SettingsController.swift */,
 				1C0BE3F21E59534700B862D2 /* images */,
 				1C0BE3BD1E59325800B862D2 /* Main.storyboard */,
+				1C46A90F1E5F7A30003BBDD2 /* HomeViewController.swift */,
 				1C6D69631E5D072B001AF16E /* WelcomePagesController.swift */,
 				1C0BE3F31E5957C800B862D2 /* UIButtonBorder.swift */,
 				1CDE04831E5E478D0041275C /* UIFontSettings.swift */,
 				1C0BE3C01E59325800B862D2 /* Assets.xcassets */,
 				1C0BE3C21E59325800B862D2 /* LaunchScreen.storyboard */,
-				1C9D311B1E5E5DD800621B64 /* LaunchViewController.swift */,
 				1C0BE3C51E59325800B862D2 /* Info.plist */,
 				1C6D696B1E5E08C1001AF16E /* PageContentController.swift */,
 			);
@@ -532,9 +532,9 @@
 				1C6D696C1E5E08C1001AF16E /* PageContentController.swift in Sources */,
 				1C0BE3BC1E59325800B862D2 /* ViewController.swift in Sources */,
 				1C0BE3BA1E59325800B862D2 /* AppDelegate.swift in Sources */,
+				1C46A9101E5F7A30003BBDD2 /* HomeViewController.swift in Sources */,
 				1CDE04841E5E478D0041275C /* UIFontSettings.swift in Sources */,
 				1C0BE3F41E5957C800B862D2 /* UIButtonBorder.swift in Sources */,
-				1C9D311C1E5E5DD800621B64 /* LaunchViewController.swift in Sources */,
 				1C6D69641E5D072B001AF16E /* WelcomePagesController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

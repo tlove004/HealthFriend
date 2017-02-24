@@ -13,23 +13,27 @@ class WelcomePagesController : UIViewController, UIPageViewControllerDataSource,
     
     
     var pageViewController:UIPageViewController!
+    var viewController:UIViewController!
     var pageLabels: Array<String>!
     var count: Int!
     var viewControllers: Array<PageContentController>!
     var startingViewController: PageContentController!
     
+    @IBOutlet weak var newLabel: UILabel!
+    @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var getStartedBtn: UIButton!
     @IBOutlet weak var HealthFriendTitle: UIImageView!
     
     @IBOutlet weak var TitleVertConstraint: NSLayoutConstraint!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Create page view controller
-        
+                
         if !(UserDefaults.standard.bool(forKey: "hasSetup")) {
             //we could use text like this
-            self.pageLabels = ["Page1", "Page2", "Page3"]
+            self.pageLabels = ["Want to change your life?", "Take control of your future", "We're here to help"]
             
             //or add an image view and have series of images
             //self.imageLabels = ["img1.png", "img2.png", "img3.png"]
@@ -42,18 +46,32 @@ class WelcomePagesController : UIViewController, UIPageViewControllerDataSource,
             self.viewControllers = [startingViewController]
             self.pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
             
-            self.pageViewController.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height-170)
+            self.pageViewController.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height-75)
             self.addChildViewController(pageViewController)
             self.view.addSubview(pageViewController.view)
             self.pageViewController.didMove(toParentViewController: self)
         }
         else {
-            getStartedBtn.isHidden = true
-            TitleVertConstraint.constant = (self.view.frame.height / 2.0) - (HealthFriendTitle.frame.height)
-            print("time to move to normal screen")
+            self.viewController = self.storyboard?.instantiateViewController(withIdentifier: "homeView") as! HomeViewController
+            self.viewController.view.frame = CGRect(x: 0, y:0, width: self.view.frame.size.width, height: self.view.frame.size.height)
+            self.addChildViewController(viewController)
+            self.view.addSubview(viewController.view)
+            self.viewController.didMove(toParentViewController: self)
+
         }
     }
     
+    func topMostController() -> UIViewController {
+        var topController: UIViewController = UIApplication.shared.keyWindow!.rootViewController!
+        while (topController.presentedViewController != nil) {
+            topController = topController.presentedViewController!
+        }
+        return topController
+    }
+    
+    @IBAction func loginBtnPressed() {
+        //segue to login screen -- if we use this we'll need to store username/password somewhere obviously
+    }
    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
