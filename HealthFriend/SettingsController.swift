@@ -27,7 +27,7 @@ class SettingsController : ViewController, CLLocationManagerDelegate {
     @IBOutlet var SaveButton: UIButton!
     
     var locationManager: CLLocationManager!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager = CLLocationManager()
@@ -38,6 +38,8 @@ class SettingsController : ViewController, CLLocationManagerDelegate {
         super.viewDidAppear(animated)
         locationManager.allowsBackgroundLocationUpdates = true
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        //locationManager.
     }
     
 

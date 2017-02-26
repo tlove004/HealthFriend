@@ -8,12 +8,6 @@
 
 import UIKit
 import Foundation
-import YelpAPI
-
-let myID = "KQOW6wvZOhPFO-uu2d4-QQ"
-let mySecret = "M9KAYPJipfuGjMKRV3yb4nyciPrmNDavFBRYRsCXSDxDpYzK86hVDShEK1ozIELi"
-
-let coords = YLPCoordinate(latitude: 123, longitude: 123)
 
 class ViewController: UIViewController {
 
@@ -27,17 +21,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
      //   getStartedBtn?.contentEdgeInsets = UIEdgeInsetsMake(20, 45, 30, 45)
-        YLPClient.authorize(withAppId: myID, secret: mySecret, completionHandler: { (client, error) -> Void in
-            //print(client!)
-            
-            client!.search(with: coords, completionHandler: { (ylpSearch, error) in
-                //let ip = IndexPath()
-                //self.CategoriesTable.allowsMultipleSelection = true
-                //for b in (ylpSearch?.businesses)! {
-                    //
-                //}
-            })
-        })
+        
     }
     
     

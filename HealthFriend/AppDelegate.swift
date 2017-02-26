@@ -7,16 +7,131 @@
 //
 
 import UIKit
+import CoreLocation
+import UserNotifications
+import YelpAPI
+
+let myID = "KQOW6wvZOhPFO-uu2d4-QQ"
+let mySecret = "M9KAYPJipfuGjMKRV3yb4nyciPrmNDavFBRYRsCXSDxDpYzK86hVDShEK1ozIELi"
+
+//let coords = YLPCoordinate(latitude: 33.6908934, longitude: -117.34151800000001)
+let blacklist: [String] = ["hotdogs"] //hotdogs == yelp's "fast food" category
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
-
+    lazy var locationManager: CLLocationManager! = {
+        let manager = CLLocationManager()
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.pausesLocationUpdatesAutomatically = false
+        manager.delegate = self
+        manager.allowsBackgroundLocationUpdates = true
+        manager.requestAlwaysAuthorization()
+        manager.distanceFilter = 10
+        return manager
+    }()
+    
+    
+    var query: YLPQuery!
+    
+    var coords: YLPCoordinate!
+    
+    //var lastNotificationDate = NSDate()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (accepted, error) in
+            if !accepted {
+                print("denied")
+            }
+        }
+        if CLLocationManager.authorizationStatus() == .authorizedAlways {
+            self.locationManager.startUpdatingLocation()
+            print("OK")
+        }
         return true
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // Do something interesting.
+        
+        print("location updated")
+        
+        self.coords = YLPCoordinate(latitude: (locations.last?.coordinate.latitude)!, longitude: (locations.last?.coordinate.longitude)!)
+        
+        YLPClient.authorize(withAppId: myID, secret: mySecret, completionHandler: { (client, error) -> Void in
+            //print(client!)
+            
+            self.query = YLPQuery.init(coordinate: self.coords)
+            
+//            var cat = YLPCategory.name
+            
+//            self.query.term = "Fast\\ Food"
+            self.query.categoryFilter = blacklist
+            self.query.radiusFilter = 30.0 //proximity
+            self.query.limit = 5 //num of results to return
+            self.query.offset = 0 //offset - no idea what this does
+            self.query.sort = .distance
+            
+            client?.search(with: self.query, completionHandler: { (ylpSearch, searchError) in
+                let num = ylpSearch?.businesses.count
+                var cat: String!
+                let notif = UNMutableNotificationContent()
+                notif.title = "Hey..."
+                
+                if num != 0 && num != nil {
+                    for i in 0...num!-1 {
+                        print(ylpSearch!.businesses[i].name)
+                        for j in 0...ylpSearch!.businesses[i].categories.count-1 {
+                            cat = ylpSearch!.businesses[i].categories[j].alias
+                            //print("name:", ylpSearch!.businesses[i].categories[j].alias)
+                            if blacklist.contains(cat) {
+                                
+                                notif.body = "Didn't you say you wanted to avoid \(ylpSearch!.businesses[i].categories[j].name)?"
+                                
+                                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+                                
+                                let id = "UYLocalNotification"
+                                let request = UNNotificationRequest(identifier: id, content: notif, trigger: trigger)
+                                UNUserNotificationCenter.current().add(request, withCompletionHandler: { (error) in
+                                    if error != nil {
+                                        print(error.debugDescription)
+                                    }
+                                })
+                                print("notify: you are in", cat)
+                            }
+                        }
+                    }
+                }
+                let err = searchError?.localizedDescription
+                if err != nil {
+                    print(err ?? "unknown")
+                }
+            })
+        })
+        
+    }
+    
+    func handle(withNotification notification: Notification) {
+        print("Received: ", notification.name.rawValue)
+    }
+    
+    func handleNotification(notification: Notification) -> Void {
+        print("handling")
+        guard let userInfo = notification.userInfo,
+            let message = userInfo["category"] as? String else {
+                print("NO userInfo found in notification")
+                return
+        }
+        //NotificationCenter.default.post
+        let alert = UIAlertController(title: "Notification!", message: "\(message) received", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//self.present(alert, animated: true, completion: nil)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error.localizedDescription)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -27,6 +142,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
+        
+        
+        self.coords = YLPCoordinate(latitude: (locationManager.location?.coordinate.latitude)!, longitude: (locationManager.location?.coordinate.longitude)!)
+        
+        //updateCoordinates()
+        //search Yelp using coordinates 
+        //if yelp result has categories in blacklist within 10 yard radius
+            // then check if inside blacklisted category
+            // if in blacklisted category
+                //then notify user
+            // else return
+        //
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {

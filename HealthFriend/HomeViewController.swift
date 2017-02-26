@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import Charts
 
+
 var SentFromHome: Bool = false
 
 
