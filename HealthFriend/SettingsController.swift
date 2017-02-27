@@ -38,7 +38,17 @@ class SettingsController : ViewController, CLLocationManagerDelegate {
         super.viewDidAppear(animated)
         locationManager.allowsBackgroundLocationUpdates = true
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        
+        blacklist = UserDefaults.standard.stringArray(forKey: "blacklist")
+        print(blacklist)
+        if blacklist.count > 1 {
+            SelectedCats.setTitle("\(blacklist[0]),...", for: .normal)
+        }
+        else {
+            SelectedCats.setTitle(blacklist[0], for: .normal)
+        }
+        MYProximity.setTitle(UserDefaults.standard.string(forKey: "proximity"), for: .normal)
+        NotificationMode.setTitle(UserDefaults.standard.string(forKey: "notificationsMode"), for: .normal)
+        AlternativeSuggestionsOption.setTitle(UserDefaults.standard.string(forKey: "altSuggestions"), for: .normal)
         //locationManager.
     }
     
@@ -162,6 +172,9 @@ class SettingsController : ViewController, CLLocationManagerDelegate {
     
     func updateNotificationsMode(action: UIAlertAction) {
         NotificationMode.setTitle(action.title, for: .normal)
+        UserDefaults.standard.set(action.title, forKey: "notificationsMode")
+        UserDefaults.standard.synchronize()
+
     }
 
     @IBAction func proxButtonPressed() {
@@ -174,18 +187,25 @@ class SettingsController : ViewController, CLLocationManagerDelegate {
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { [weak alert] (_) in
             let textField = alert!.textFields![0] as UITextField
             self.MYProximity.setTitle(textField.text, for: .normal)
+            UserDefaults.standard.set(textField.text, forKey: "proximity")
         }))
         self.present(alert, animated: true, completion: nil)
+        UserDefaults.standard.synchronize()
+
     }
     
     @IBAction func altButtonPressed() {
         if AlternativeSuggestionsOption.currentTitle! == "Disabled" {
             AlternativeSuggestionsOption.setTitle("Enabled", for: .normal)
+            UserDefaults.standard.set("Enabled", forKey: "altSuggestions")
             suggestions = true
         }
         else {
             AlternativeSuggestionsOption.setTitle("Disabled", for: .normal)
+            UserDefaults.standard.set("Disabled", forKey: "altSuggestions")
+            suggestions = false
         }
+        UserDefaults.standard.synchronize()
     }
     
 

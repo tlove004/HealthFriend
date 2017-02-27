@@ -44,9 +44,11 @@ class TableViewController: UITableViewController {
         for _ in categories.indexPathsForSelectedRows! {
             numSelected += 1
         }
+        var array: [String] = []
         for cat in categories.visibleCells {
             //print(numSelected)
             if cat.isSelected {
+                array.append(cat.textLabel!.text!)
                 if  numSelected == 1 {
                     //print(cat.textLabel!.text)
                     selectedCats.append((cat.textLabel?.text)!)
@@ -54,10 +56,12 @@ class TableViewController: UITableViewController {
                 }
                 else if numSelected > 1 {
                     selectedCats.append((cat.textLabel?.text)! + ",...")
-                    break
                 }
+                
             }
         }
+        UserDefaults.standard.set(array, forKey: "blacklist")
+        UserDefaults.standard.synchronize()
         //print(numSelected)
         let prev = presentingViewController as! SettingsController
         prev.SelectedCats.setTitle(selectedCats, for: .normal)

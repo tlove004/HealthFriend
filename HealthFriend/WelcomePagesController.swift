@@ -30,11 +30,17 @@ class WelcomePagesController : UIViewController, UIPageViewControllerDataSource,
     override func viewDidLoad() {
         super.viewDidLoad()
         // Create page view controller
+        
+        
                 
         if !(UserDefaults.standard.bool(forKey: "hasSetup")) {
             //we could use text like this
             self.pageLabels = ["Want to change your life?", "Take control of your future", "We're here to help"]
             
+            UserDefaults.standard.set(["Fast Food"], forKey: "blacklist")
+            UserDefaults.standard.set(10, forKey: "proximity")
+            UserDefaults.standard.set("Enabled", forKey: "altSuggestions")
+            UserDefaults.standard.set("Moderate", forKey: "notificationsMode")
             //or add an image view and have series of images
             //self.imageLabels = ["img1.png", "img2.png", "img3.png"]
             
