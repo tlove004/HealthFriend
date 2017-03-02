@@ -7,7 +7,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -31,8 +30,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HealthFriend.png" translatesAutoresizingMaskIntoConstraints="NO" id="6qs-lM-EHz">
+                                <rect key="frame" x="37" y="81" width="301" height="68"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="68" id="Xsj-oi-FIz"/>
+                                </constraints>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H1c-DK-ti0">
-                                <rect key="frame" x="70" y="610" width="90" height="19"/>
+                                <rect key="frame" x="142" y="609" width="90" height="19"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Set Up">
                                     <color key="titleColor" red="0.97636800999999995" green="0.97653132679999999" blue="0.97634500270000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -41,47 +46,19 @@
                                     <segue destination="pLX-5R-2bl" kind="show" id="XgM-D0-SSr"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HealthFriend.png" translatesAutoresizingMaskIntoConstraints="NO" id="6qs-lM-EHz">
-                                <rect key="frame" x="37" y="81" width="301" height="68"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="68" id="Xsj-oi-FIz"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="New?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5K-Iz-cjA">
-                                <rect key="frame" x="16" y="610" width="74" height="19"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="textColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jLs-mm-Q86">
-                                <rect key="frame" x="282" y="604" width="64" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="Login">
-                                    <color key="titleColor" red="0.97636800999999995" green="0.97653132679999999" blue="0.97634500270000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="loginBtnPressed" destination="nXn-Zc-GkN" eventType="touchUpInside" id="fGI-MQ-c5p"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="s9H-ub-VVb" firstAttribute="top" secondItem="H1c-DK-ti0" secondAttribute="bottom" constant="36" id="BHX-x2-Mx5"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="jLs-mm-Q86" secondAttribute="trailing" constant="13" id="JvA-E1-t3s"/>
-                            <constraint firstItem="g5K-Iz-cjA" firstAttribute="centerY" secondItem="H1c-DK-ti0" secondAttribute="centerY" id="L2x-ka-DZw"/>
-                            <constraint firstItem="jLs-mm-Q86" firstAttribute="centerY" secondItem="H1c-DK-ti0" secondAttribute="centerY" id="TlX-yq-Rt5"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="g5K-Iz-cjA" secondAttribute="leading" id="WcD-g5-rLl"/>
                             <constraint firstItem="6qs-lM-EHz" firstAttribute="top" secondItem="918-B9-qmi" secondAttribute="bottom" constant="61" id="Ygw-dy-Pp0"/>
+                            <constraint firstItem="H1c-DK-ti0" firstAttribute="centerX" secondItem="l3E-cy-00Y" secondAttribute="centerX" id="niA-bv-eMO"/>
                             <constraint firstItem="6qs-lM-EHz" firstAttribute="centerX" secondItem="l3E-cy-00Y" secondAttribute="centerX" id="sYX-SD-pH0"/>
-                            <constraint firstItem="H1c-DK-ti0" firstAttribute="leading" secondItem="g5K-Iz-cjA" secondAttribute="trailing" constant="8" id="yow-IJ-H7w"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="HealthFriendTitle" destination="6qs-lM-EHz" id="2uU-Mg-Gwp"/>
                         <outlet property="TitleVertConstraint" destination="Ygw-dy-Pp0" id="Xbm-dn-0R3"/>
                         <outlet property="getStartedBtn" destination="H1c-DK-ti0" id="DPm-sd-gJU"/>
-                        <outlet property="loginBtn" destination="jLs-mm-Q86" id="YnH-Zp-cGN"/>
-                        <outlet property="newLabel" destination="g5K-Iz-cjA" id="loY-Fs-Mlo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Et-E3-A47" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -143,7 +120,7 @@
                                 </items>
                             </navigationBar>
                             <button opaque="NO" contentMode="redraw" fixedFrame="YES" restorationIdentifier="catButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CFV-0E-5e2">
-                                <rect key="frame" x="0.0" y="80" width="375" height="65"/>
+                                <rect key="frame" x="0.0" y="80" width="375" height="67"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.1670993865" green="0.60904800889999999" blue="0.95585638279999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <accessibility key="accessibilityConfiguration" identifier="catButton">
@@ -610,7 +587,7 @@ you want to be before being notified.</string>
             <objects>
                 <navigationController title="Categories" automaticallyAdjustsScrollViewInsets="NO" id="L51-FY-Dhj" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="8df-RB-GX3">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8df-RB-GX3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -629,6 +606,6 @@ you want to be before being notified.</string>
         <image name="ic_settings.png" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qjt-ov-Mjs"/>
+        <segue reference="XgM-D0-SSr"/>
     </inferredMetricsTieBreakers>
 </document>

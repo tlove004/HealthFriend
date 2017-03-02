@@ -19,8 +19,6 @@ class WelcomePagesController : UIViewController, UIPageViewControllerDataSource,
     var viewControllers: Array<PageContentController>!
     var startingViewController: PageContentController!
     
-    @IBOutlet weak var newLabel: UILabel!
-    @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var getStartedBtn: UIButton!
     @IBOutlet weak var HealthFriendTitle: UIImageView!
     
@@ -35,7 +33,7 @@ class WelcomePagesController : UIViewController, UIPageViewControllerDataSource,
                 
         if !(UserDefaults.standard.bool(forKey: "hasSetup")) {
             //we could use text like this
-            self.pageLabels = ["Want to change your life?", "Take control of your future", "We're here to help"]
+            self.pageLabels = ["Ready to change your life?", "HealthFriend helps you take\n control of your future", "Set it and forget it"]
             
             UserDefaults.standard.set(["Fast Food"], forKey: "blacklist")
             UserDefaults.standard.set(10, forKey: "proximity")
@@ -44,6 +42,7 @@ class WelcomePagesController : UIViewController, UIPageViewControllerDataSource,
             //or add an image view and have series of images
             //self.imageLabels = ["img1.png", "img2.png", "img3.png"]
             
+            self.getStartedBtn.isHidden = true
             
             self.count = pageLabels.count //imageLabels.count
             self.pageViewController = self.storyboard?.instantiateViewController(withIdentifier: "PageViewController") as! UIPageViewController
@@ -134,7 +133,14 @@ class WelcomePagesController : UIViewController, UIPageViewControllerDataSource,
         else {
             index -= 1
         }
-        return viewControllerAtIndex(index: index)
+        let nextView = viewControllerAtIndex(index: index) as! PageContentController
+        if (nextView.pageIndex == count-1) {
+            self.getStartedBtn.isHidden = false
+        }
+        else {
+            self.getStartedBtn.isHidden = true
+        }
+        return nextView
         
 
         
@@ -149,9 +155,14 @@ class WelcomePagesController : UIViewController, UIPageViewControllerDataSource,
         {
             index = 0
         }
-        return viewControllerAtIndex(index: index)
-
-        
+        let nextView = viewControllerAtIndex(index: index) as! PageContentController
+        if (nextView.pageIndex == count-1) {
+            self.getStartedBtn.isHidden = false
+        }
+        else {
+            self.getStartedBtn.isHidden = true
+        }
+        return nextView
     }
     
     

@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import UserNotifications
 
 class SettingsController : ViewController, CLLocationManagerDelegate {
     
@@ -132,7 +133,18 @@ class SettingsController : ViewController, CLLocationManagerDelegate {
             UserDefaults.standard.set(true, forKey: "hasSetup")
             UserDefaults.standard.synchronize()
         }
-        if UserDefaults.standard.bool(forKey: "hasSetup") {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (accepted, error) in
+            if !accepted {
+                self.requestNotifications(accepted: true)
+            }
+        }
+        while (UIApplication.shared.currentUserNotificationSettings?.types == []) {
+            //wait for request to return
+        }
+        if (UIApplication.shared.currentUserNotificationSettings?.types == nil) {
+            requestNotifications(accepted: true)
+        }
+        if UserDefaults.standard.bool(forKey: "hasSetup") && (UIApplication.shared.currentUserNotificationSettings?.types.contains(.alert) )! {
             let home = storyboard?.instantiateViewController(withIdentifier: "homeView") as! HomeViewController
             sleep(1)
             UIApplication.shared.keyWindow?.rootViewController = home
@@ -142,6 +154,19 @@ class SettingsController : ViewController, CLLocationManagerDelegate {
     func requestLocation(accepted: Bool) {
         if (accepted) {
             let alert = UIAlertController(title: "Turn on Location Services", message: "This app is useless without location services enabled.  Please go to settings and enable location services (allow in background) for this application.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "No thanks", style: UIAlertActionStyle.cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Settings", style: UIAlertActionStyle.destructive, handler: { action in
+                if let appSettings = NSURL(string: UIApplicationOpenSettingsURLString) {
+                    UIApplication.shared.open(appSettings as URL)
+                }
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func requestNotifications(accepted: Bool) {
+        if (accepted) {
+            let alert = UIAlertController(title: "Allow us to send you notifications", message: "This app is useless without notifications enabled.  Please go to settings and enable notifications for this application.", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "No thanks", style: UIAlertActionStyle.cancel, handler: nil))
             alert.addAction(UIAlertAction(title: "Settings", style: UIAlertActionStyle.destructive, handler: { action in
                 if let appSettings = NSURL(string: UIApplicationOpenSettingsURLString) {

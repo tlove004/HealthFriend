@@ -41,11 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (accepted, error) in
-            if !accepted {
-                print("denied")
-            }
-        }
         if CLLocationManager.authorizationStatus() == .authorizedAlways {
             self.locationManager.startUpdatingLocation()
             print("OK")
